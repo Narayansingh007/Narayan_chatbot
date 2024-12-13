@@ -1,3 +1,11 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
+JWT_SECRET_KEY = 'secret123'
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
+# More
+
+
 MAX_ATTEMPTS = 2
 MAX_HISTORY = 20
 TEMPERATURE = 0.7

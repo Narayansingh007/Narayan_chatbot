@@ -4,12 +4,8 @@ from flask_cors import CORS
 from flask import Flask, request, jsonify, render_template
 from processing import setup, sale_script_welcome_message, sale_script_reply_message
 from scheduling import sale_script_get_message_code, sale_script_get_scheduled_time, get_date_time_condition
-from dotenv import load_dotenv
-
-load_dotenv()
-
-jwt_secret_key = 'secret123'
-
+from config import JWT_SECRET_KEY
+from utils import validate_jwt_token
 
 app = Flask(__name__)
 CORS(app)
@@ -22,19 +18,14 @@ def home():
 
 @app.route('/sale_script', methods=['POST'])
 def sale_script():
-
     # Check JWT Token
-    token = None
+    token = None,
+    error = validate_jwt_token()
+    print(error)
+    if error:
+       return error, 401
     if 'x-access-tokens' in request.headers:
         token = request.headers['x-access-tokens']
-    if not token:
-        print(f"`jwt_token` is missing!")
-        return "`jwt_token` is missing", 401
-    if token != jwt_secret_key:
-        print(f"`jwt_token` is invalid!")
-        return "`jwt_token` is invalid", 401
-
-    # Read payload
     request_json = request.json
     if not request_json:
         return "No request json", 400

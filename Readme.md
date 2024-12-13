@@ -36,6 +36,24 @@ This document provides details about the performance and response behavior when 
 ### Sample Response
 String
 
-## Attach Screenshot
+- **Date of Test**: `13/12/2024`
+In this update, the following changes have been made:
 
-<img src="./ss/Screenshot 2024-12-12 181528.png">
+1. **`app.py`**:
+   - Improved the JWT token validation and OpenAI integration.
+   - Configured global JWT token and OpenAI API key.
+   
+2. **`processing.py`**:
+   - Added global JWT token and OpenAI API key configurations.
+
+3. **`utils.py`**:
+   - Added JWT token validation logic to check whether the token is valid or invalid.
+
+4. **`config.py`**:
+   - Configured the JWT token and OpenAI API key in this file to be imported into other files as needed.
+
+### Key Updates:
+- **JWT Token Validation**: The app now validates the **JWT_SECRET_KEY** to ensure only authorized users can interact with the chatbot.
+- **OpenAI Key Configuration**: The **OPENAI_API_KEY** has been centralized in the `config.py` file for easier management.
+
+

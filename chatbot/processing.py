@@ -8,10 +8,9 @@ from prompt import SALE_PROMPT
 from scheduling import convert_iso_datetime, convert_timestamp_to_datetime, get_two_weeks_later, get_first_valid_date
 from config import CHATBOT_MODEL, TEMPERATURE, MAX_ATTEMPTS, MAX_HISTORY, \
     INDEX_STORAGE_PATH, COLLECTION_NAME, EMBEDDING_MODEL, SIMILAR_TOP_K
-from dotenv import load_dotenv
+from config import OPENAI_API_KEY
 
-load_dotenv()
-openai_api_key = os.getenv("OPENAI_API_KEY", "")
+
 
 def setup():
 
@@ -33,7 +32,7 @@ def setup():
 
     # Setup openAI model
     openai_client = OpenAI(
-        api_key=openai_api_key,
+        api_key=OPENAI_API_KEY,
         timeout=30
     )
     return retriever, openai_client
